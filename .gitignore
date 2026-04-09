@@ -1,0 +1,56 @@
+# Entorno virtual
+venv/
+env/
+ENV/
+.venv
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# Datos sensibles
+data/uploads/*.xlsx
+!data/templates/
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+.cache/
+.pytest_cache/
+
+# Otros
+.env
+.env.local
+config.local.py
