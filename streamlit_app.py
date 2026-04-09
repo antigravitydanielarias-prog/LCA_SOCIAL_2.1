@@ -21,6 +21,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+ #cualquier cosa
 # Importar módulos
 from config import PROJECT_ROOT, UPLOADS_DIR
 from utils.data_loader import validar_carga_datos, descargar_templates
