@@ -71,7 +71,7 @@ if panel is not None and not panel.empty and "Actor" in panel.columns:
 c1, c2, c3 = st.columns([2, 1, 1])
 with c1:
     if actual is not None and requerido is not None:
-        st.plotly_chart(crear_gauge_readiness(actual, requerido), use_container_width=True)
+        st.plotly_chart(crear_gauge_readiness(actual, requerido), width='stretch')
     else:
         st.info("Sin datos de readiness para el actor principal.")
 with c2:
@@ -88,9 +88,9 @@ st.divider()
 st.subheader("👥 Readiness por Actor")
 fig = crear_grafico_comparacion_actores(panel)
 if fig:
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 elif panel is not None:
-    st.dataframe(panel, use_container_width=True)
+    st.dataframe(panel, width='stretch')
 
 st.divider()
 

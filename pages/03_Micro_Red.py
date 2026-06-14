@@ -90,7 +90,7 @@ else:
             
             dims = resultado['dimensiones_cognitivas']
             fig = crear_radar_8d(dims)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             st.markdown("**Interpretación:**")
             st.markdown("""
@@ -104,7 +104,7 @@ else:
             st.subheader("Tabla de Dimensiones Cognitivas")
             
             df_dims = crear_tabla_dimensiones(dims)
-            st.dataframe(df_dims, use_container_width=True)
+            st.dataframe(df_dims, width='stretch')
             
             # Desglose por dimensión
             st.subheader("Detalle por Dimensión")
