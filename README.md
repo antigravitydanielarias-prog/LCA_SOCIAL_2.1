@@ -2,6 +2,9 @@
 
 **Sistemas de Energía Comunitaria en Territorios en Desarrollo**
 
+> 📘 **¿Cómo se usa?** Sigue el **[Manual de Uso](MANUAL_DE_USO.md)** — instalación,
+> ejecución, carga de datos e interpretación de los *gates*, paso a paso.
+
 ## 🎯 Descripción
 
 El **Modelo 2.0** es un sistema integral de evaluación que integra múltiples capas de análisis para evaluar la viabilidad y progreso de proyectos de energía comunitaria en territorios con desarrollo limitado.
