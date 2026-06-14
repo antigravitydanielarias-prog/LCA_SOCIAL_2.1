@@ -86,47 +86,45 @@ def crear_tabla_dimensiones(dimensiones):
     return df
 
 def crear_grafico_serie_temporal(memoria):
-    """Crea gráfico de series temporales de 12 meses"""
-    
-    if not memoria.get('fechas'):
+    """Serie temporal de 12 meses. Acepta un DataFrame (col 'Fecha' + dims) o un dict."""
+
+    if memoria is None:
         return None
-    
-    fig = go.Figure()
-    
-    fechas = memoria.get('fechas', [])
-    
-    # Colores por dimensión
+
     colores_dims = {
-        'IA': '#1f77b4',
-        'IAT': '#ff7f0e',
-        'ICI': '#d62728',
-        'IVC': '#2ca02c',
-        'IME': '#9467bd',
-        'IIN': '#8c564b',
-        'IPRA': '#e377c2',
-        'ICS': '#7f7f7f'
+        'IA': '#1f77b4', 'IAT': '#ff7f0e', 'ICI': '#d62728', 'IVC': '#2ca02c',
+        'IME': '#9467bd', 'IIN': '#8c564b', 'IPRA': '#e377c2', 'ICS': '#7f7f7f',
     }
-    
+
+    # Normalizar la entrada -> (fechas, {dim: valores})
+    if isinstance(memoria, pd.DataFrame):
+        if memoria.empty:
+            return None
+        col_fecha = next((c for c in memoria.columns if str(c).strip().lower() == 'fecha'), None)
+        fechas = memoria[col_fecha].astype(str).tolist() if col_fecha is not None else list(range(len(memoria)))
+        series = {dim: pd.to_numeric(memoria[dim], errors='coerce').tolist()
+                  for dim in DIMENSIONES if dim in memoria.columns}
+    else:
+        fechas = memoria.get('fechas', [])
+        series = {dim: memoria.get(dim, []) for dim in DIMENSIONES}
+
+    if not len(fechas):
+        return None
+
+    fig = go.Figure()
     for dim in DIMENSIONES.keys():
-        valores = memoria.get(dim, [])
-        if valores:
+        valores = series.get(dim, [])
+        if valores is not None and len(valores) > 0:
             fig.add_trace(go.Scatter(
-                x=fechas,
-                y=valores,
-                mode='lines+markers',
-                name=dim,
-                line=dict(color=colores_dims.get(dim), width=2)
+                x=fechas, y=valores, mode='lines+markers', name=dim,
+                line=dict(color=colores_dims.get(dim), width=2),
             ))
-    
+
     fig.update_layout(
-        title='Series Temporales (12 meses)',
-        xaxis_title='Fecha',
-        yaxis_title='Valor (0-100)',
-        height=400,
-        hovermode='x unified',
-        legend=dict(x=0.01, y=0.99)
+        title='Series Temporales (12 meses)', xaxis_title='Fecha',
+        yaxis_title='Valor (0-100)', height=400, hovermode='x unified',
+        legend=dict(x=0.01, y=0.99),
     )
-    
     return fig
 
 def crear_grafico_comparacion_actores(panel_0):

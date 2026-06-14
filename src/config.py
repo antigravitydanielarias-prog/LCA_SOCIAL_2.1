@@ -50,19 +50,29 @@ SUBCAPAS = {
     'C': 'Alineación'
 }
 
-# Umbrales de Gates
-GATE_THRESHOLDS = {
-    'ICI_MINIMO': 40,  # Umbral mínimo de confianza institucional
-    'IOM_MINIMO': 30,  # Umbral mínimo operativa-material
-    'DIMENSION_CRITICA': 25,  # Umbral crítico para cualquier dimensión
-    'POBREZA_ALTO_RIESGO': 50  # Umbral de pobreza que requiere condicionales
-}
+# Umbrales de Gates.
+# FUENTE ÚNICA DE VERDAD: el motor `modelo_slca.gates.UMBRALES` (cada umbral
+# arrastra su justificación bibliográfica). Aquí solo se reexponen como dict
+# plano para la UI; si el motor no estuviera disponible, se usan los literales.
+try:
+    from modelo_slca.gates import UMBRALES as _UMBRALES
+    GATE_THRESHOLDS = {k: _UMBRALES[k].valor for k in (
+        'ICI_MINIMO', 'IOM_MINIMO', 'DIMENSION_CRITICA', 'POBREZA_ALTO_RIESGO'
+    )}
+except Exception:  # pragma: no cover - fallback defensivo
+    GATE_THRESHOLDS = {
+        'ICI_MINIMO': 40,        # Confianza institucional mínima
+        'IOM_MINIMO': 30,        # Capacidad operativa-material mínima
+        'DIMENSION_CRITICA': 25, # Piso crítico para cualquier dimensión
+        'POBREZA_ALTO_RIESGO': 50,  # Activa condición especial
+    }
 
-# Estados de Gate
+# Estados de Gate (incluye el estado precautorio por datos faltantes)
 GATE_STATES = {
     'blocked': '❌ BLOQUEADO',
     'conditional': '⚠️ CONDICIONAL',
-    'enabled': '✅ HABILITADO'
+    'enabled': '✅ HABILITADO',
+    'datos_insuficientes': '🚫 DATOS INSUFICIENTES',
 }
 
 # Colores para visualizaciones
@@ -70,6 +80,7 @@ COLORS = {
     'blocked': '#d62728',
     'conditional': '#ff7f0e',
     'enabled': '#2ca02c',
+    'datos_insuficientes': '#6c757d',
     'critico': '#d62728',
     'bajo': '#ff9999',
     'moderado': '#ffcc99',

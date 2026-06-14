@@ -196,15 +196,25 @@ else:
             st.subheader("🚪 Estado de GATE")
             
             gate_state = resultado.get('estado_gate', 'unknown')
-            
+
             if gate_state == 'blocked':
-                st.error(f"❌ **BLOQUEADO**")
+                st.error("❌ **BLOQUEADO** — barrera real del territorio")
             elif gate_state == 'conditional':
-                st.warning(f"⚠️ **CONDICIONAL**")
+                st.warning("⚠️ **CONDICIONAL** — proceder con condiciones especiales")
+            elif gate_state == 'datos_insuficientes':
+                st.info("🚫 **DATOS INSUFICIENTES** — no se puede concluir (principio de precaución)")
             else:
-                st.success(f"✅ **HABILITADO**")
-            
+                st.success("✅ **HABILITADO**")
+
             st.markdown(f"**Justificación:** {resultado.get('justificacion_gate', 'No disponible')}")
+
+            # Principio de precaución: la ausencia de evidencia NO habilita.
+            faltantes = resultado.get('datos_faltantes', [])
+            if faltantes:
+                st.warning(
+                    "**Faltan datos requeridos** (la ausencia de evidencia no "
+                    "equivale a aprobación):\n\n" + "\n".join(f"- {f}" for f in faltantes)
+                )
             
             st.divider()
             
