@@ -76,7 +76,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Ejecutar
-streamlit run streamlit_app.py
+python -m streamlit run streamlit_app.py
 ```
 
 ### Opción 2: Docker (Recomendado para servidor)

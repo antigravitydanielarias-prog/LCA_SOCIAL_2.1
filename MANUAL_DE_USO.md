@@ -61,7 +61,7 @@ pip install -r requirements.txt
 Desde la carpeta `LCA_SOCIAL_2.1`:
 
 ```bash
-streamlit run streamlit_app.py
+python -m streamlit run streamlit_app.py
 ```
 
 - Se abrirá automáticamente en el navegador. Si no, entra a **http://localhost:8501**.
@@ -69,7 +69,7 @@ streamlit run streamlit_app.py
 - **Para detener** la aplicación: pulsa `Ctrl + C` en la terminal.
 
 > ¿El puerto 8501 está ocupado? Usa otro:
-> `streamlit run streamlit_app.py --server.port 8502`
+> `python -m streamlit run streamlit_app.py --server.port 8502`
 
 ---
 
@@ -193,7 +193,7 @@ Deben pasar **14 pruebas** (motor de decisión + integración con el caso real).
 | `Unable to copy ... venvlauncher.exe` | El venv estaba activo al recrearlo | `deactivate`, borra la carpeta `venv` y recréala — o sáltate el venv |
 | «Faltan archivos» | No están los 5 Excel en `data/uploads/` | Cárgalos (Configuración) o cópialos a esa carpeta |
 | Todo sale **DATOS INSUFICIENTES** | Celdas de valores vacías o falta una dimensión/IOM | Completa los 8 valores por fase y el IOM |
-| El navegador no abre | El puerto 8501 está ocupado | `streamlit run streamlit_app.py --server.port 8502` |
+| El navegador no abre | El puerto 8501 está ocupado | `python -m streamlit run streamlit_app.py --server.port 8502` |
 | Cambié un Excel y no se refleja | Caché de Streamlit | Botón **Limpiar caché** (Configuración) o recarga la página |
 | (Solo en Claude Code) error `check-sql-files.py` | Plugin externo de CockroachDB con un script faltante | Es **inofensivo**; desactiva/reinstala ese plugin con `/plugin` |
 
