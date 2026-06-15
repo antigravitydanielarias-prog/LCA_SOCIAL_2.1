@@ -20,25 +20,39 @@ interpretar los veredictos de los *gates* y exportar los resultados.
 
 ---
 
-## 2. Instalación (una sola vez)
+## 2. Instalación
 
-Abre una terminal en la carpeta `LCA_SOCIAL_2.1` y ejecuta:
+> ⚠️ **Paso 0 — entra primero a la carpeta del proyecto.** El error
+> «no se encuentra `requirements.txt`» casi siempre es por estar en otra carpeta
+> (como `C:\Users\TuUsuario`).
 
-```bash
-# 1) (Opcional pero recomendado) entorno virtual aislado
+### Windows (PowerShell)
+```powershell
+# 1) Entra a la carpeta del proyecto (ajusta la ruta a donde lo tengas)
+cd "D:\FOTOS\escritorio semana 14\GRID\Vento\LCA social\LCA_SOCIAL_2.1"
+
+# 2) (Opcional) entorno virtual aislado
 python -m venv venv
+.\venv\Scripts\Activate.ps1
 
-# Windows:
-venv\Scripts\activate
-# macOS / Linux:
-source venv/bin/activate
-
-# 2) Instalar dependencias
+# 3) Instalar dependencias
 pip install -r requirements.txt
 ```
 
-> Si más adelante quieres correr las pruebas, instala también las dependencias de
-> desarrollo: `pip install -r requirements-dev.txt`.
+### macOS / Linux
+```bash
+cd ".../LCA social/LCA_SOCIAL_2.1"
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+> 💡 **¿Ya tienes Python con Streamlit en el sistema?** Puedes **saltarte el
+> entorno virtual y el `pip install`** e ir directo a la sección 3. En Windows
+> **no uses `source`** (es de macOS/Linux); la activación en PowerShell es
+> `.\venv\Scripts\Activate.ps1`.
+>
+> Para las pruebas: `pip install -r requirements-dev.txt`.
 
 ---
 
@@ -174,6 +188,9 @@ Deben pasar **14 pruebas** (motor de decisión + integración con el caso real).
 
 | Síntoma | Causa probable | Solución |
 |---------|----------------|----------|
+| `Could not open requirements file` | Estás en otra carpeta (p. ej. `C:\Users\TuUsuario`) | Primero `cd` a la carpeta `LCA_SOCIAL_2.1` y repite |
+| `source ... no se reconoce` (Windows) | `source` es solo de macOS/Linux | En PowerShell usa `.\venv\Scripts\Activate.ps1`, o sáltate el venv |
+| `Unable to copy ... venvlauncher.exe` | El venv estaba activo al recrearlo | `deactivate`, borra la carpeta `venv` y recréala — o sáltate el venv |
 | «Faltan archivos» | No están los 5 Excel en `data/uploads/` | Cárgalos (Configuración) o cópialos a esa carpeta |
 | Todo sale **DATOS INSUFICIENTES** | Celdas de valores vacías o falta una dimensión/IOM | Completa los 8 valores por fase y el IOM |
 | El navegador no abre | El puerto 8501 está ocupado | `streamlit run streamlit_app.py --server.port 8502` |
