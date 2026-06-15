@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LCA Social 2.1 — Resumen visual</title>
+<style>
+  :root{
+    --verde:#0f6e56; --verde2:#1d9e75; --tinta:#1f2421; --suave:#5f6b66;
+    --linea:#e3e8e5; --fondo:#f6f8f7; --tarjeta:#ffffff;
+    --ok-bg:#e1f5ee; --ok-tx:#0f6e56; --ok-bd:#1d9e75;
+    --cond-bg:#faeeda; --cond-tx:#854f0b; --cond-bd:#ba7517;
+    --bloq-bg:#fcebeb; --bloq-tx:#a32d2d; --bloq-bd:#e24b4a;
+    --gris-bg:#f1efe8; --gris-tx:#5f5e5a; --gris-bd:#888780;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--fondo);color:var(--tinta);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6}
+  header{background:var(--verde);color:#fff;padding:34px 20px}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  header .wrap{padding:0}
+  header h1{margin:0 0 6px;font-size:26px;font-weight:600}
+  header p{margin:0;font-size:16px;opacity:.92;max-width:640px}
+  main{padding:28px 0 10px}
+  section{margin:0 0 30px}
+  h2{font-size:19px;font-weight:600;margin:0 0 4px}
+  .sub{color:var(--suave);font-size:14px;margin:0 0 16px}
+  .leyenda{display:flex;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--suave);margin-bottom:6px}
+  .leyenda span{display:flex;align-items:center;gap:7px}
+  .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .card{background:var(--tarjeta);border:1px solid var(--linea);border-radius:14px;padding:18px 20px}
+  .panel{border-radius:14px;padding:20px;border:1px solid var(--linea);margin-bottom:18px}
+  .panel .estado{display:flex;align-items:center;gap:10px}
+  .panel .estado b{font-size:24px;font-weight:600}
+  .panel .razon{margin:8px 0 0;font-size:15px}
+  .fila{display:flex;align-items:center;gap:14px;margin:12px 0}
+  .fila label{flex:0 0 190px;color:var(--suave);font-size:15px}
+  .fila input[type=range]{flex:1;accent-color:var(--verde2)}
+  .fila .val{flex:0 0 36px;text-align:right;font-weight:600}
+  .botones{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  button{font:inherit;cursor:pointer;border:1px solid var(--verde2);background:#fff;color:var(--verde);
+    border-radius:10px;padding:9px 14px;font-size:14px}
+  button.primario{background:var(--verde);color:#fff;border-color:var(--verde)}
+  button:hover{filter:brightness(.97)}
+  .grid{display:grid;gap:14px}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .mirada .ic{font-size:24px}
+  .mirada b{display:block;margin:8px 0 2px;font-size:16px}
+  .mirada span{color:var(--suave);font-size:14px}
+  .fase b{display:flex;align-items:center;gap:9px;font-size:15px}
+  .fase p{margin:8px 0 0;color:var(--suave);font-size:14px}
+  footer{border-top:1px solid var(--linea);background:#fff;padding:22px 0;margin-top:10px}
+  footer a{color:var(--verde);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .pies{font-size:13px;color:var(--suave);margin-top:14px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>¿Esta comunidad está lista para avanzar?</h1>
+  <p>Una herramienta que decide si un proyecto de energía solar comunitaria puede pasar de fase — mirando no solo lo técnico, sino la madurez social del territorio.</p>
+</div></header>
+
+<main class="wrap">
+
+  <section>
+    <h2>El semáforo de decisión</h2>
+    <p class="sub">Por cada comunidad y fase, el sistema entrega uno de cuatro veredictos.</p>
+    <div class="leyenda">
+      <span><i class="dot" style="background:var(--ok-bd)"></i> Habilitado — proceder</span>
+      <span><i class="dot" style="background:var(--cond-bd)"></i> Condicional — con salvaguardas</span>
+      <span><i class="dot" style="background:var(--bloq-bd)"></i> Bloqueado — resolver antes</span>
+      <span><i class="dot" style="background:var(--gris-bd)"></i> Sin datos — no concluir</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pruébalo tú</h2>
+    <p class="sub">Mueve las barras y observa cómo cambia el veredicto. Empieza en el caso real de La Esperanza.</p>
+    <div id="panel" class="panel">
+      <div class="estado"><span id="p-emoji" style="font-size:22px">●</span><b id="p-titulo">Bloqueado</b></div>
+      <p id="p-razon" class="razon">…</p>
+    </div>
+    <div class="fila"><label for="ici">Confianza institucional</label><input id="ici" type="range" min="0" max="100" step="1" value="28"><span class="val" id="v-ici">28</span></div>
+    <div class="fila"><label for="iom">Capacidad material</label><input id="iom" type="range" min="0" max="100" step="1" value="44"><span class="val" id="v-iom">44</span></div>
+    <div class="fila"><label for="pob">Pobreza del territorio</label><input id="pob" type="range" min="0" max="100" step="1" value="67"><span class="val" id="v-pob">67</span></div>
+    <div class="botones">
+      <button class="primario" id="preset">Caso La Esperanza · Fase 1</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Las 4 miradas que combina</h2>
+    <p class="sub">Ninguna basta sola; el veredicto nace de cruzarlas.</p>
+    <div class="grid g4">
+      <div class="card mirada"><div class="ic">🧠</div><b>Cognitiva</b><span>lo que la gente piensa y confía</span></div>
+      <div class="card mirada"><div class="ic">⚡</div><b>Material</b><span>lo que existe y funciona</span></div>
+      <div class="card mirada"><div class="ic">📍</div><b>Territorial</b><span>el contexto del lugar (DANE)</span></div>
+      <div class="card mirada"><div class="ic">📈</div><b>Temporal</b><span>la trayectoria de 12 meses</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Caso real · La Esperanza, Bajo Atrato (Chocó)</h2>
+    <p class="sub">El gradiente que produjo el modelo con datos reales del territorio.</p>
+    <div class="grid g3">
+      <div class="card fase"><b><i class="dot" style="background:var(--bloq-bd)"></i> Fase 1 · preparación</b><p>Bloqueado — la confianza institucional (28) está bajo el mínimo. Primero reparar la relación.</p></div>
+      <div class="card fase"><b><i class="dot" style="background:var(--cond-bd)"></i> Fase 2 · ejecución</b><p>Condicional — la pobreza del territorio (67%) exige proceder con salvaguardas.</p></div>
+      <div class="card fase"><b><i class="dot" style="background:var(--cond-bd)"></i> Fase 3 · sostenibilidad</b><p>Condicional — misma salvaguarda por el alto nivel de pobreza.</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  <strong>Enlaces</strong> ·
+  <a href="https://github.com/antigravitydanielarias-prog/LCA_SOCIAL_2.1">Repositorio</a> ·
+  <a href="https://github.com/antigravitydanielarias-prog/LCA_SOCIAL_2.1/blob/feat/motor-slca-integracion/MANUAL_DE_USO.md">Manual de uso</a> ·
+  App local: <code>http://localhost:8501</code>
+  <p class="pies">Modelo S-LCA 2.1 · Universidad EAFIT · Los umbrales (confianza ≥ 40, capacidad ≥ 30, pobreza &gt; 50%) están fundamentados en literatura académica. Este resumen es divulgativo.</p>
+</div></footer>
+
+<script>
+(function(){
+  var ici=document.getElementById('ici'),iom=document.getElementById('iom'),pob=document.getElementById('pob');
+  var vi=document.getElementById('v-ici'),vo=document.getElementById('v-iom'),vp=document.getElementById('v-pob');
+  var panel=document.getElementById('panel'),tit=document.getElementById('p-titulo'),raz=document.getElementById('p-razon'),emo=document.getElementById('p-emoji');
+  function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n);}
+  function compute(){
+    var a=Math.round(+ici.value),m=Math.round(+iom.value),p=Math.round(+pob.value);
+    vi.textContent=a;vo.textContent=m;vp.textContent=p;
+    var s;
+    if(a<40) s={t:'Bloqueado',r:'La confianza institucional ('+a+') está por debajo de 40. Sin un mínimo de confianza, la participación no es genuina: hay que repararla antes de avanzar.',bg:'--bloq-bg',tx:'--bloq-tx',bd:'--bloq-bd'};
+    else if(m<30) s={t:'Bloqueado',r:'La capacidad material ('+m+') está por debajo de 30: faltan condiciones físicas y técnicas mínimas.',bg:'--bloq-bg',tx:'--bloq-tx',bd:'--bloq-bd'};
+    else if(p>50) s={t:'Condicional',r:'Se puede avanzar, pero con salvaguardas: la pobreza del territorio ('+p+'%) supera el umbral del 50%.',bg:'--cond-bg',tx:'--cond-tx',bd:'--cond-bd'};
+    else s={t:'Habilitado',r:'Se cumplen las condiciones evaluables. Avanzar y mantener el monitoreo de la trayectoria.',bg:'--ok-bg',tx:'--ok-tx',bd:'--ok-bd'};
+    panel.style.background=css(s.bg);panel.style.borderColor=css(s.bd);
+    tit.style.color=css(s.tx);raz.style.color=css(s.tx);emo.style.color=css(s.bd);
+    tit.textContent=s.t;raz.textContent=s.r;
+  }
+  [ici,iom,pob].forEach(function(el){el.addEventListener('input',compute);});
+  document.getElementById('preset').addEventListener('click',function(){ici.value=28;iom.value=44;pob.value=67;compute();});
+  compute();
+})();
+</script>
+</body>
+</html>
