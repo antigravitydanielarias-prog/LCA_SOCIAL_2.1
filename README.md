@@ -2,6 +2,9 @@
 
 **Sistemas de Energía Comunitaria en Territorios en Desarrollo**
 
+> 📘 **¿Cómo se usa?** Sigue el **[Manual de Uso](MANUAL_DE_USO.md)** — instalación,
+> ejecución, carga de datos e interpretación de los *gates*, paso a paso.
+
 ## 🎯 Descripción
 
 El **Modelo 2.0** es un sistema integral de evaluación que integra múltiples capas de análisis para evaluar la viabilidad y progreso de proyectos de energía comunitaria en territorios con desarrollo limitado.
@@ -23,6 +26,27 @@ Cada análisis genera:
 - **Costos de Transición**: Estimaciones de inversión
 - **Recomendaciones Priorizadas**: Acciones específicas
 - **Reportes Visuales**: Gráficos interactivos con Plotly
+
+## 🧱 Arquitectura (v2.1)
+
+Separación en 3 capas, cada una testeable de forma aislada:
+
+1. **Núcleo de dominio** — `src/modelo_slca/` (`gates.py`, `referencias.py`).
+   Python puro, sin UI ni Excel. Es la **única fuente de verdad** de la lógica
+   de gates; cada umbral arrastra su cita académica y la ausencia de datos
+   produce `DATOS_INSUFICIENTES` (principio de precaución, nunca `ENABLED`).
+2. **Adaptador** — `src/utils/` (`data_loader.py`, `calculations.py`).
+   Lee los Excel reales (tolera fila de título, contexto en formato largo, IOM
+   precalculado), invoca al motor y arma el resultado para la interfaz.
+3. **Presentación** — `streamlit_app.py` + `pages/`. Muestra veredictos, citas,
+   costos y el estado precautorio.
+
+## ✅ Pruebas
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest tests -v   # 14 pruebas: motor + integración (caso La Esperanza)
+```
 
 ## 📋 Requisitos
 
@@ -52,7 +76,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Ejecutar
-streamlit run streamlit_app.py
+python -m streamlit run streamlit_app.py
 ```
 
 ### Opción 2: Docker (Recomendado para servidor)
@@ -151,4 +175,4 @@ Este proyecto está bajo licencia [MIT/Propietaria]
 
 ---
 
-**Versión**: 2.0 | **Estado**: Beta | **Última actualización**: Abril 2024
+**Versión**: 2.1 | **Estado**: Operativo (end-to-end, 14 pruebas en verde) | **Última actualización**: Junio 2026

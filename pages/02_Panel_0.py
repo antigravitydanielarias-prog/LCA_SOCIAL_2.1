@@ -39,14 +39,14 @@ if panel_0 is None or panel_0.empty:
         'Alertas': ['Diálogos iniciados', 'Cambio político', 'Ninguna', 'Ninguna', 'Fondos restringidos']
     })
     
-    st.dataframe(ejemplo, use_container_width=True)
+    st.dataframe(ejemplo, width='stretch')
     
     st.info("📥 Carga el archivo PANEL_0_PROTAGONISTAS.xlsx con esta estructura en la pestaña PROTAGONISTAS_READINESS")
     
 else:
     # Mostrar datos cargados
     st.subheader("📊 Estado Actual")
-    st.dataframe(panel_0, use_container_width=True)
+    st.dataframe(panel_0, width='stretch')
     
     st.divider()
     
@@ -69,7 +69,7 @@ else:
             height=400
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Volver al dashboard
 st.divider()

@@ -47,7 +47,7 @@ if memoria is None or memoria.empty:
         'Eventos': ['', 'Inicio diálogos', 'Capacitación', '...', '(Actual)']
     })
     
-    st.dataframe(ejemplo, use_container_width=True)
+    st.dataframe(ejemplo, width='stretch')
     
 else:
     # Mostrar gráfico de series
@@ -55,13 +55,13 @@ else:
     
     fig = crear_grafico_serie_temporal(memoria)
     if fig:
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     st.divider()
     
     # Tabla de datos
     st.subheader("📋 Datos Brutos")
-    st.dataframe(memoria, use_container_width=True)
+    st.dataframe(memoria, width='stretch')
     
     st.divider()
     
@@ -144,7 +144,7 @@ else:
         if volatilidad_data:
             df_volatilidad = pd.DataFrame(volatilidad_data)
             df_volatilidad = df_volatilidad.sort_values('Volatilidad', ascending=False)
-            st.dataframe(df_volatilidad, use_container_width=True)
+            st.dataframe(df_volatilidad, width='stretch')
             
             st.markdown("""
             **Interpretación:**

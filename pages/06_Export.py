@@ -87,8 +87,8 @@ with tab2:
         
         if datos.get('dimensiones') is not None:
             df = datos['dimensiones']
-            csv = df.to_csv(index=False)
-            
+            csv = df.to_csv(index=True)  # conservar la dimensión (índice)
+
             st.download_button(
                 "📥 Descargar CSV - Dimensiones",
                 data=csv,
@@ -102,10 +102,11 @@ with tab2:
     with col2:
         st.markdown("#### Contexto Territorial")
         
-        if datos.get('contexto') is not None:
-            df = datos['contexto']
+        ctx = datos.get('contexto')
+        if ctx:
+            df = pd.DataFrame(list(ctx.items()), columns=['Indicador', 'Valor'])
             csv = df.to_csv(index=False)
-            
+
             st.download_button(
                 "📥 Descargar CSV - Contexto",
                 data=csv,

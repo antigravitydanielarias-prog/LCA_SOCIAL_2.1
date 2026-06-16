@@ -18,7 +18,3 @@ headless = true
 port = 8501
 runOnSave = true
 enableXsrfProtection = true
-
-[ui]
-hideTopBar = false
-hideFooterWaterMark = false

@@ -90,7 +90,7 @@ else:
             
             dims = resultado['dimensiones_cognitivas']
             fig = crear_radar_8d(dims)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             st.markdown("**Interpretación:**")
             st.markdown("""
@@ -104,7 +104,7 @@ else:
             st.subheader("Tabla de Dimensiones Cognitivas")
             
             df_dims = crear_tabla_dimensiones(dims)
-            st.dataframe(df_dims, use_container_width=True)
+            st.dataframe(df_dims, width='stretch')
             
             # Desglose por dimensión
             st.subheader("Detalle por Dimensión")
@@ -196,15 +196,25 @@ else:
             st.subheader("🚪 Estado de GATE")
             
             gate_state = resultado.get('estado_gate', 'unknown')
-            
+
             if gate_state == 'blocked':
-                st.error(f"❌ **BLOQUEADO**")
+                st.error("❌ **BLOQUEADO** — barrera real del territorio")
             elif gate_state == 'conditional':
-                st.warning(f"⚠️ **CONDICIONAL**")
+                st.warning("⚠️ **CONDICIONAL** — proceder con condiciones especiales")
+            elif gate_state == 'datos_insuficientes':
+                st.info("🚫 **DATOS INSUFICIENTES** — no se puede concluir (principio de precaución)")
             else:
-                st.success(f"✅ **HABILITADO**")
-            
+                st.success("✅ **HABILITADO**")
+
             st.markdown(f"**Justificación:** {resultado.get('justificacion_gate', 'No disponible')}")
+
+            # Principio de precaución: la ausencia de evidencia NO habilita.
+            faltantes = resultado.get('datos_faltantes', [])
+            if faltantes:
+                st.warning(
+                    "**Faltan datos requeridos** (la ausencia de evidencia no "
+                    "equivale a aprobación):\n\n" + "\n".join(f"- {f}" for f in faltantes)
+                )
             
             st.divider()
             

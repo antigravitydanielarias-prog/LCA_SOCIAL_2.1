@@ -49,6 +49,8 @@ data/uploads/*.xlsx
 *.tmp
 .cache/
 .pytest_cache/
+~$*.xlsx
+~$*.docx
 
 # Otros
 .env
